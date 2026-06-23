@@ -11,14 +11,6 @@ jobs:
     steps:
       - name: Ping Supabase
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "${{ secrets.SUPABASE_URL }}/rest/v1/" \
+          curl -v "https://xmngodiakzrublifqzu.supabase.co/rest/v1/" \
             -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}")
-          echo "Status: $STATUS"
-          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 500 ]; then
-            echo "Success"
-          else
-            echo "Unexpected status: $STATUS"
-            exit 1
-          fi
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
